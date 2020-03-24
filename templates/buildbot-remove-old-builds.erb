@@ -4,6 +4,6 @@ BASE_DIR="/usr/local/src/www/htdocs/buildbot/unstable"
 TARGETS=$(ls ${BASE_DIR})
 for target in ${TARGETS}; do
   for build in $(ls -t "${BASE_DIR}/${target}" | tail -n +10); do
-    rm -r "${BASE_DIR}/${target}/${build}"
+    rm -r "${BASE_DIR:?}/${target:?}/${build:?}"
   done
 done

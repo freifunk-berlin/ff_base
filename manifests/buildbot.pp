@@ -14,6 +14,12 @@ class ff_base::buildbot {
     mode   => '0755'
   }
 
-
-
+  # add cron that creates the download list
+  file { '/etc/cron.hourly/buildbot-update-lists':
+    ensure => present,
+    content => template('ff_base/buildbot-update-lists.erb'),
+    owner   => 'root',
+    group  => 'root',
+    mode   => '0755'
+  }
 }

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PATH=/bin:/usr/bin
+cd /usr/local/src/www/htdocs/buildbot
+(find . -type f | cut -c 3- ; \
+grep "Firmware: git branch" unstable/*/*/VERSION.txt ; \
+find . -name "VERSION.txt" -printf "UNIXTIME %C@ %p\n" \
+) | lzma > /usr/local/src/www/htdocs/buildbot/.files.lzma.new
+mv /usr/local/src/www/htdocs/buildbot/.files.lzma.new /usr/local/src/www/htdocs/buildbot/.files.lzma
