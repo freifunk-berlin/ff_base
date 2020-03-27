@@ -1,16 +1,9 @@
 class ff_base () {
 
-  class { 'apt': }
-
-  # update packages before we install any
-  exec { 'apt-update':
-    command => '/usr/bin/apt-get update'
-  }
-  Exec['apt-update'] -> Package <| |>
-
-  # do not install recommended packages
-  Package {
-    install_options => ['--no-install-recommends'],
+  class { 'apt':
+    update => {
+      frequency => 'daily',
+    },
   }
 
   # list of base packages we deploy on every node
@@ -29,6 +22,7 @@ class ff_base () {
     'vim'
   ]:
     ensure => installed,
+    install_options => ['--no-install-recommends'],
   }
 
   # install security updates
